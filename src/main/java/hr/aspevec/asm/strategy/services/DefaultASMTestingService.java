@@ -8,19 +8,19 @@ import hr.aspevec.asm.strategy.annotation.EnableStrategySelectionLayer;
 @EnableStrategySelectionLayer(definition = ASMTestingService.class)
 public class DefaultASMTestingService implements ASMTestingService {
 
-	@Override
-	public String getResult() {
-		return "DefaultResult-ASM";
-	}
+    @Override
+    public String getResult() {
+        return "DefaultResult-ASM";
+    }
 
-	@Override
-	public String getResult(String input) {
-		return "DefaultResult-ASM " + input;
-	}
+    @Override
+    public String getResult(String input) {
+        return "DefaultResult-ASM " + input;
+    }
 
-	@Override
-	public boolean isMatch(String code) {
-		return false;
-	}
+    @Override
+    public boolean isMatch(String code) {
+        return false;
+    }
 
 }

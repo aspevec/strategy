@@ -12,26 +12,26 @@ import hr.aspevec.strategy.services.TestingService;
 @Controller
 public class TestController {
 
-	@Autowired
-	private TestingService testingService;
+    @Autowired
+    private TestingService testingService;
 
-	@Autowired
-	private ASMTestingService asmTestingService;
+    @Autowired
+    private ASMTestingService asmTestingService;
 
-	@RequestMapping(value="/methodStrategy", method=RequestMethod.GET)
-	@ResponseBody
-	public TestResponseData methodStrategy() {
-		TestResponseData response = new TestResponseData();
-		response.setField(testingService.getResult());
-		return response;
-	}
+    @RequestMapping(value="/methodStrategy", method=RequestMethod.GET)
+    @ResponseBody
+    public TestResponseData methodStrategy() {
+        TestResponseData response = new TestResponseData();
+        response.setField(testingService.getResult());
+        return response;
+    }
 
-	@RequestMapping(value="/methodStrategyASM", method=RequestMethod.GET)
-	@ResponseBody
-	public TestResponseData methodStrategyASM() {
-		TestResponseData response = new TestResponseData();
-		response.setField(asmTestingService.getResult("ASM"));
-		return response;
-	}
+    @RequestMapping(value="/methodStrategyASM", method=RequestMethod.GET)
+    @ResponseBody
+    public TestResponseData methodStrategyASM() {
+        TestResponseData response = new TestResponseData();
+        response.setField(asmTestingService.getResult("ASM"));
+        return response;
+    }
 
 }

@@ -5,18 +5,18 @@ package hr.aspevec;
  */
 public enum CountryEnum {
 
-	UK("UK"),
-	FR("FR"),
-	DE("DE");
+    UK("UK"),
+    FR("FR"),
+    DE("DE");
 
-	private String code;
+    private String code;
 
-	private  CountryEnum(String code) {
-		this.code = code;
-	}
+    private  CountryEnum(String code) {
+        this.code = code;
+    }
 
-	public String getCode()
-	{
-		return this.code;
-	}
+    public String getCode()
+    {
+        return this.code;
+    }
 }

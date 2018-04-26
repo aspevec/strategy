@@ -4,8 +4,8 @@ import hr.aspevec.asm.strategy.ServiceStrategy;
 
 public interface ASMTestingService extends ServiceStrategy {
 
-	String getResult();
+    String getResult();
 
-	String getResult(String input);
+    String getResult(String input);
 
 }
