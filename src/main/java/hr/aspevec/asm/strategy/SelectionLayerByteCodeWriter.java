@@ -158,9 +158,9 @@ public class SelectionLayerByteCodeWriter {
      */
     private String getSignatureForSelectionLayer(Class<?> selectionInterface) {
         return String.format(SELETOR_CLASS_SIGNATURE_FORMAT, 
-                Type.getDescriptor(ROOT_STRATEGY_CLASS).replaceAll(";", ""),
-                Type.getDescriptor(selectionInterface),
-                Type.getDescriptor(selectionInterface));
+                             Type.getDescriptor(ROOT_STRATEGY_CLASS).replaceAll(";", ""),
+                             Type.getDescriptor(selectionInterface),
+                             Type.getDescriptor(selectionInterface));
     }
 
     private String replaceDotWithSlashInPath(String path) {
@@ -169,8 +169,8 @@ public class SelectionLayerByteCodeWriter {
 
     private String[] getMethodExceptions(Method method) {
         return Stream.of(method.getExceptionTypes())
-                .map(e->replaceDotWithSlashInPath(e.getName()))
-                .toArray(size -> new String[size]);
+                     .map(e->replaceDotWithSlashInPath(e.getName()))
+                     .toArray(size -> new String[size]);
     }
 
 }
