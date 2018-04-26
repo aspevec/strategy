@@ -22,7 +22,7 @@ public class TestController {
     @ResponseBody
     public TestResponseData methodStrategy() {
         TestResponseData response = new TestResponseData();
-        response.setField(testingService.getResult());
+        response.setField(testingService.getResult("Default"));
         return response;
     }
 
