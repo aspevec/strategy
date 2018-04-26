@@ -16,5 +16,5 @@ public class UKASMTestingService extends DefaultASMTestingService {
 	public boolean isMatch(String code) {
 		return CountryEnum.UK.getCode().equals(code);
 	}
-	
+
 }

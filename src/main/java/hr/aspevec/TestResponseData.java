@@ -11,5 +11,5 @@ public class TestResponseData {
 	public void setField(String field) {
 		this.field = field;
 	}
-	
+
 }

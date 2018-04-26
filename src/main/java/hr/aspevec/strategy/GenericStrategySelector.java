@@ -27,20 +27,20 @@ public class GenericStrategySelector<T extends ServiceStrategy> implements Initi
 	public void afterPropertiesSet() throws Exception {
 		mapStrategyToEachCountry();
 	}
-	
+
 	private void mapStrategyToEachCountry()
 	{
 		lookup = new HashMap<>();
 		Stream.of(CountryEnum.values())
-			  .forEach(c -> assignStrategyToCountry(c));
+		.forEach(c -> assignStrategyToCountry(c));
 	}
 
 	private void assignStrategyToCountry(CountryEnum country)
 	{
 		T strategy = strategies.stream()
-							   .filter(s -> s.isMatch(country.getCode()))
-							   .findFirst()
-							   .orElse(defaultStrategy);
+				.filter(s -> s.isMatch(country.getCode()))
+				.findFirst()
+				.orElse(defaultStrategy);
 		lookup.put(country.getCode(), strategy);
 	}
 
@@ -53,7 +53,7 @@ public class GenericStrategySelector<T extends ServiceStrategy> implements Initi
 	{
 		return selectStrategy(getCountryCodeFromSession());
 	}	
-	
+
 	/**
 	 * TODO implement logic for accesing country of current user - session
 	 */

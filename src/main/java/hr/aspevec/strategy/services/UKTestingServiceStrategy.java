@@ -11,7 +11,7 @@ public class UKTestingServiceStrategy extends DefaultTestingServiceStrategy {
 	public String getResult(String input) {
 		return "UKResult " + input;
 	}
-	
+
 	@Override
 	public boolean isMatch(String code) {
 		return CountryEnum.UK.getCode().equals(code);

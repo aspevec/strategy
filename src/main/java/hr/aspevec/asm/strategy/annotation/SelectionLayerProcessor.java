@@ -18,7 +18,7 @@ public class SelectionLayerProcessor implements BeanDefinitionRegistryPostProces
 
 	private DynamicClassLoader loader = new DynamicClassLoader();
 	private SelectionLayerByteCodeWriter byteCodeWriter = new SelectionLayerByteCodeWriter();
-	
+
 	@Override
 	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
 		for (String beanName : registry.getBeanDefinitionNames()) {
@@ -33,12 +33,12 @@ public class SelectionLayerProcessor implements BeanDefinitionRegistryPostProces
 			}
 		}
 	}
-	
+
 	private void processAnnotation(final BeanDefinitionRegistry registry, final String beanName, final String className) throws ClassNotFoundException
 	{
 		final Class<? extends Object> selectionClass = Class.forName(className);
 		EnableStrategySelectionLayer[] selectionLayers = (EnableStrategySelectionLayer[]) selectionClass.getAnnotationsByType(EnableStrategySelectionLayer.class);
-		
+
 		if (ArrayUtils.isNotEmpty(selectionLayers))
 		{		
 			for (EnableStrategySelectionLayer selectionLayer : selectionLayers) {
@@ -51,14 +51,14 @@ public class SelectionLayerProcessor implements BeanDefinitionRegistryPostProces
 		Class<?> definition = selectionLayer.definition();
 		ClassWriter writer = byteCodeWriter.getClassWriter(definition);
 		Class<?> selectorClazz = loader.defineClass(definition.getName() + "StrategySelector", writer.toByteArray());
-		
+
 		BeanDefinitionBuilder selectorBdb = BeanDefinitionBuilder.genericBeanDefinition(selectorClazz);
 		selectorBdb.getRawBeanDefinition().setPrimary(true);
 		selectorBdb.addPropertyReference("defaultStrategy", beanName);
-		
+
 		registry.registerBeanDefinition(selectorBdb.getBeanDefinition().getBeanClassName(), selectorBdb.getBeanDefinition());	
 	}
-	
+
 	@Override
 	public void postProcessBeanFactory(ConfigurableListableBeanFactory arg0) throws BeansException {
 		// TODO Auto-generated method stub	

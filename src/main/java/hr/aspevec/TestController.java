@@ -11,13 +11,13 @@ import hr.aspevec.strategy.services.TestingService;
 
 @Controller
 public class TestController {
-	
+
 	@Autowired
 	private TestingService testingService;
-	
+
 	@Autowired
 	private ASMTestingService asmTestingService;
-	
+
 	@RequestMapping(value="/methodStrategy", method=RequestMethod.GET)
 	@ResponseBody
 	public TestResponseData methodStrategy() {
@@ -25,7 +25,7 @@ public class TestController {
 		response.setField(testingService.getResult());
 		return response;
 	}
-	
+
 	@RequestMapping(value="/methodStrategyASM", method=RequestMethod.GET)
 	@ResponseBody
 	public TestResponseData methodStrategyASM() {
