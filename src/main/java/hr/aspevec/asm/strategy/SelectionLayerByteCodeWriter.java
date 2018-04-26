@@ -61,17 +61,17 @@ public class SelectionLayerByteCodeWriter {
 				null, 
 				null);
 
-		constructor.visitCode();				// Start the code for this method
-		constructor.visitVarInsn(ALOAD, 0);		// Load "this" onto the stack
+		constructor.visitCode();	// Start the code for this method
+		constructor.visitVarInsn(ALOAD, 0);	// Load "this" onto the stack
 
-		constructor.visitMethodInsn(INVOKESPECIAL,							// Invoke an instance method (non-virtual)
+		constructor.visitMethodInsn(INVOKESPECIAL,	// Invoke an instance method (non-virtual)
 				replaceDotWithSlashInPath(ROOT_STRATEGY_CLASS.getName()),	// Class on which the method is defined
-				"<init>",													// Name of the method
-				"()V",														// Descriptor
-				false);														// Is this class an interface?
+				"<init>",	// Name of the method
+				"()V",	// Descriptor
+				false);	// Is this class an interface?
 
-		constructor.visitInsn(RETURN);			// End the constructor method
-		constructor.visitMaxs(1, 1);			// Specify max stack and local vars
+		constructor.visitInsn(RETURN);	// End the constructor method
+		constructor.visitMaxs(1, 1);	// Specify max stack and local vars
 	}
 
 	private void configureClassMethods(ClassWriter writer, Class<?> selectionInterface) {		
@@ -85,22 +85,22 @@ public class SelectionLayerByteCodeWriter {
 	}
 
 	private MethodVisitor defineMethodVisitor(ClassWriter writer, Method method) {
-		return writer.visitMethod(ACC_PUBLIC,		// public method
-				method.getName(), 					// name
+		return writer.visitMethod(ACC_PUBLIC,	// public method
+				method.getName(),	// name
 				Type.getMethodDescriptor(method),	// descriptor of the method - defines parameter and return types
-				null, 								// signature (null means not generic)
-				getMethodExceptions(method));		// exceptions (array of strings)
+				null,	// signature (null means not generic)
+				getMethodExceptions(method));	// exceptions (array of strings)
 	}
 
 	private void defineMethodImplementation(MethodVisitor methodVisitor, Class<?> selectionInterface, Method method) {
-		methodVisitor.visitCode();					// Start the code for this method
-		methodVisitor.visitVarInsn(ALOAD, 0);		// Load "this" onto the stack
+		methodVisitor.visitCode();	// Start the code for this method
+		methodVisitor.visitVarInsn(ALOAD, 0);	// Load "this" onto the stack
 
-		methodVisitor.visitMethodInsn(INVOKEVIRTUAL, 							// Invoke an instance method
+		methodVisitor.visitMethodInsn(INVOKEVIRTUAL, 	// Invoke an instance method
 				getPackageAndClassNameForSelectionLayer(selectionInterface),	// Class on which the method is defined
-				STRATEGY_SELECTION_METHOD_NAME,								    // Name of the method
-				"()" + Type.getDescriptor(ROOT_STRATEGY_INTERFACE),				// Descriptor
-				false);															// Is this class an interface?
+				STRATEGY_SELECTION_METHOD_NAME,	// Name of the method
+				"()" + Type.getDescriptor(ROOT_STRATEGY_INTERFACE),	// Descriptor
+				false);	// Is this class an interface?
 
 		methodVisitor.visitTypeInsn(CHECKCAST, replaceDotWithSlashInPath(selectionInterface.getName()));	//Check if cast to our interface is possible
 
@@ -108,11 +108,11 @@ public class SelectionLayerByteCodeWriter {
 			methodVisitor.visitVarInsn(ALOAD, i);	//Load parameter from stack
 		}
 
-		methodVisitor.visitMethodInsn(INVOKEINTERFACE, 							// Invoke an interface method
-				replaceDotWithSlashInPath(selectionInterface.getName()),		// Class on which the method is defined
-				method.getName(),												// Name of the method
-				Type.getMethodDescriptor(method), 								// Descriptor
-				true);															// Is this class an interface?
+		methodVisitor.visitMethodInsn(INVOKEINTERFACE,	// Invoke an interface method
+				replaceDotWithSlashInPath(selectionInterface.getName()),	// Class on which the method is defined
+				method.getName(),	// Name of the method
+				Type.getMethodDescriptor(method),	// Descriptor
+				true);	// Is this class an interface?
 
 		methodVisitor.visitInsn(Opcodes.ARETURN);	// End this method
 		methodVisitor.visitMaxs(1 + method.getParameterTypes().length, 1 + method.getParameterTypes().length);	// Specify max stack and local vars
